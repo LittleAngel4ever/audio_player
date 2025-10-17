@@ -2,57 +2,56 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8"/>
-    <title>Spotify</title>
+    <title>Audio Player</title>
     <link rel="icon" href="assets/ikonka.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <aside>
-        <div class="logo">🎧 Web Player</div>
-            <div class="search">
-                <input id="search" type="text" placeholder="Поиск по трекам…" />
-            </div>
-        <div id="library"></div>
-    </aside>
-    <main>
-        <section class="grid" id="albums"></section>
-    <footer class="player">
-        <div class="nowplaying">
-            <img id="cover" src="" alt="cover"/>
-            <div class="np-meta">
-                <div class="np-title" id="title">Выберите трек</div>
-                <div class="np-artist" id="artist">—</div>
-            </div>
-            <span class="pill" id="status">Paused</span>
+    <div id="music-list" class="player-list-style">
+        <h2>Some songs</h2>
+        <ul id="music-items"></ul>
+    </div>
+    <div id="player-box" class="player-box" style="display:none;">
+        <button id="back-btn" onclick="returnToList()" class="round-button">
+            <img src="assets/back.png" alt="Назад">
+        </button>
+        <img id="album-cover" src="" alt="Обложка" class="album-image">
+        <div class="track-info">
+            <h2 id="song-title">Song name</h2>
+            <h3 id="song-artist">Ваня Дмитриенко</h3>
+        </div>
+        <audio id="audio-player" preload="metadata"></audio>
+        <div class="progress-wrap">
+            <input type="range" id="seek-bar" value="0" min="0" max="100">
+        </div>
+        <div class="time-wrap">
+            <span id="time-current">0:00</span>
+            <span id="time-total">0:00</span>
+        </div>
+        <div class="volume-wrap">
+            <span class="volume-icon">🔊</span>
+            <input type="range" id="sound-bar" min="0" max="100" value="80">
         </div>
         <div class="controls">
-            <div class="buttons">
-                <button class="btn" id="btn-shuffle" title="Shuffle">🔀</button>
-                <button class="btn" id="btn-prev" title="Prev">⏮️</button>
-                <button class="btn round" id="btn-play" title="Play/Pause">▶️</button>
-                <button class="btn" id="btn-next" title="Next">⏭️</button>
-                <button class="btn" id="btn-repeat" title="Repeat">🔁</button>
-            </div>
-            <div class="progress">
-                <div class="time" id="current">0:00</div>
-                <input id="seek" type="range" min="0" max="100" value="0" step="0.1" />
-                <div class="time" id="duration">0:00</div>
-            </div>
+            <button onclick="prevSong()" class="round-button">
+              <img src="assets/prev.png" alt="Prev" />
+            </button>
+            <button id="play-btn" onclick="togglePlay()" class="round-button">
+              <img id="play-symbol" src="assets/play.png" alt="Play" />
+            </button>
+            <button onclick="nextSong()" class="round-button">
+              <img src="assets/next.png" alt="Next" />
+            </button>
+            <a id="download-link" href="" download class="round-button">
+              <img src="assets/download.png" alt="Download" />
+            </a>
         </div>
-      <div class="right">
-        <div class="volume">
-            <span>🔉</span>
-            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.8" />
-        </div>
-        <div class="queue">
-            <select id="queue"></select>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <audio id="audio" crossorigin="anonymous"></audio>
-  <script src="script.js"></script>
+        <button id="text-btn" onclick="showLyrics()" class="text-button">
+            <img src="assets/text.png" alt="Song text"> Song text
+        </button>
+        <div id="song-text" style="display:none;"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
