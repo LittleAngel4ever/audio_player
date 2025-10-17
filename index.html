@@ -9,21 +9,21 @@
 </head>
 <body>
     <div id="music-list" class="player-list-style">
-        <h2>Some songs</h2>
+        <h2>Songs</h2>
         <ul id="music-items"></ul>
     </div>
     <div id="player-box" class="player-box" style="display:none;">
         <button id="back-btn" onclick="returnToList()" class="round-button">
-            <img src="assets/back.png" alt="Назад">
+            <img src="assets/back.png" alt="Назад" />
         </button>
-        <img id="album-cover" src="" alt="Обложка" class="album-image">
+        <img id="album-cover" src="" alt="Обложка" class="album-image" />
         <div class="track-info">
             <h2 id="song-title">Song name</h2>
             <h3 id="song-artist">Ваня Дмитриенко</h3>
         </div>
         <audio id="audio-player" preload="metadata"></audio>
         <div class="progress-wrap">
-            <input type="range" id="seek-bar" value="0" min="0" max="100">
+            <input type="range" id="seek-bar" value="0" min="0" max="100" />
         </div>
         <div class="time-wrap">
             <span id="time-current">0:00</span>
@@ -31,26 +31,29 @@
         </div>
         <div class="volume-wrap">
             <span class="volume-icon">🔊</span>
-            <input type="range" id="sound-bar" min="0" max="100" value="80">
+            <input type="range" id="sound-bar" min="0" max="100" value="80" />
         </div>
         <div class="controls">
             <button onclick="prevSong()" class="round-button">
-              <img src="assets/prev.png" alt="Prev" />
+                <img src="assets/prev.png" alt="Prev" />
             </button>
             <button id="play-btn" onclick="togglePlay()" class="round-button">
-              <img id="play-symbol" src="assets/play.png" alt="Play" />
+                <img id="play-symbol" src="assets/play.png" alt="Play" />
             </button>
             <button onclick="nextSong()" class="round-button">
-              <img src="assets/next.png" alt="Next" />
+                <img src="assets/next.png" alt="Next" />
             </button>
             <a id="download-link" href="" download class="round-button">
-              <img src="assets/download.png" alt="Download" />
+                <img src="assets/download.png" alt="Download" />
             </a>
         </div>
-        <button id="text-btn" onclick="showLyrics()" class="text-button">
-            <img src="assets/text.png" alt="Song text"> Song text
+        <button id="text-btn" onclick="toggleLyricsPanel()" class="text-button">
+            <img src="assets/text.png" alt="Song text" /> Song text
         </button>
-        <div id="song-text" style="display:none;"></div>
+    </div>
+    <div id="lyrics-panel">
+        <h3>Song text</h3>
+        <div id="song-text"></div>
     </div>
     <script src="script.js"></script>
 </body>
