@@ -1,0 +1,198 @@
+:root{
+  --bg:#121212;
+  --card:#181818;
+  --muted:#b3b3b3;
+  --text:#ffffff;
+  --accent:#1db954;
+}
+
+*{ box-sizing:border-box }
+html, body{ height:100% }
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font:14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Arial;
+  display:flex;
+  min-height:100vh;
+}
+
+/* Sidebar */
+aside{
+  width:280px;
+  background:#000;
+  padding:16px;
+  border-right:1px solid #222;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.logo{ font-weight:700; letter-spacing:0.5px }
+.search input{
+  width:100%;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#111;
+  color:#eee;
+}
+.search input::placeholder{ color:#777 }
+.search input:focus{
+  outline:none;
+  border-color:#444;
+  box-shadow:0 0 0 3px rgba(29,185,84,.15);
+}
+
+/* Library rows */
+#library > div:hover{ background:#151515 }
+#library > div:active{ transform:scale(0.995) }
+
+/* Main content */
+main{ flex:1; display:flex; flex-direction:column }
+.grid{
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:16px;
+}
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:12px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  transition:transform .15s ease, background .15s ease;
+}
+.card:hover{ transform:translateY(-2px); background:#1a1a1a }
+.card img{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:8px;
+}
+.card .title{ font-weight:600 }
+.card .artist{ color:var(--muted); font-size:13px }
+
+/* Player bar */
+.player{
+  position:sticky;
+  bottom:0;
+  width:100%;
+  background:#000;
+  border-top:1px solid #222;
+  display:grid;
+  grid-template-columns:320px 1fr 320px;
+  align-items:center;
+  gap:16px;
+  padding:10px 16px;
+}
+.nowplaying{ display:flex; align-items:center; gap:12px; min-width:0 }
+.nowplaying img{
+  width:56px; height:56px; border-radius:6px; object-fit:cover;
+}
+.np-meta{ min-width:0 }
+.np-title{
+  font-weight:600;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.np-artist{
+  color:var(--muted);
+  font-size:13px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* Controls */
+.controls{ display:flex; flex-direction:column; align-items:center; gap:8px }
+.buttons{ display:flex; align-items:center; gap:10px }
+.btn{
+  width:32px; height:32px;
+  display:grid; place-items:center;
+  color:#ddd; background:transparent; border:none;
+  cursor:pointer; border-radius:6px;
+  transition:color .15s ease, background .15s ease;
+}
+.btn.round{ width:36px; height:36px; border-radius:50%; background:#222 }
+.btn:hover{ color:#fff; background:#1a1a1a }
+.btn.active{ color:var(--accent) }
+.btn:focus{ outline:none; box-shadow:0 0 0 3px rgba(29,185,84,.25) }
+
+/* Progress */
+.progress{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:10px;
+  width:100%;
+}
+.time{ color:var(--muted); font-variant-numeric:tabular-nums }
+
+input[type="range"]{
+  appearance:none;           /* стандарт */
+  -webkit-appearance:none;   /* Chrome/Safari */
+  width:100%;
+  height:4px;
+  background:#333;
+  border-radius:999px;
+  outline:none;
+}
+input[type="range"]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:12px; height:12px;
+  border-radius:50%;
+  background:var(--accent);
+  cursor:pointer;
+  margin-top:-4px;
+  box-shadow:0 0 0 2px #111;
+}
+input[type="range"]::-webkit-slider-runnable-track{
+  height:4px;
+  background:#333;
+  border-radius:999px;
+}
+
+/* Right side */
+.right{ display:flex; align-items:center; gap:12px; justify-self:end }
+.volume{ display:flex; align-items:center; gap:8px; width:160px }
+.queue{ width:180px; max-width:30vw }
+.queue select{
+  width:100%;
+  background:#111;
+  color:#eee;
+  border:1px solid #333;
+  border-radius:8px;
+  padding:8px;
+}
+.queue select:focus{
+  outline:none;
+  border-color:#444;
+  box-shadow:0 0 0 3px rgba(29,185,84,.15);
+}
+
+/* Pills */
+.pill{
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#222;
+  color:#ddd;
+  font-size:12px;
+}
+.hidden{ display:none }
+
+/* Responsive */
+@media (max-width:900px){
+  aside{ display:none }
+  .player{ grid-template-columns:1fr }
+  .right{ justify-self:start; flex-wrap:wrap; gap:10px }
+  .volume{ width:140px }
+}
+@media (max-width:520px){
+  .progress{ grid-template-columns:1fr }
+  .time{ display:none }
+  .queue{ width:100% }
+}
