@@ -28,7 +28,7 @@ function loadingSongs(ind) {
   document.getElementById("music-list").style.display = "none"
   document.getElementById("player-box").style.display = "block"
   document.getElementById("song-title").textContent = track.title
-  document.getElementById("song-artist").textContent = "Исполнитель"
+  document.getElementById("song-artist").textContent = "Ванф Дмитриенко"
   document.getElementById("album-cover").src = track.cover
 
   audios = document.getElementById("audio-player")
