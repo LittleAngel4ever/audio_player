@@ -72,9 +72,7 @@ function togglePlay() {
         icon.src = "assets/pause.png"
         icon.alt = "Pause"
       }
-    }).catch(() => {
-      // Если браузер блокирует автозапуск — ничего не делаем
-    })
+    }).catch(() => {})
   } else {
     audios.pause()
     if (icon) {
@@ -160,7 +158,6 @@ window.onload = () => {
   if (ct) ct.textContent = "0:00"
   if (tt) tt.textContent = "0:00"
 
-  // Скрываем панель текста при старте
   const panel = document.getElementById("lyrics-panel")
   if (panel) panel.classList.remove("active")
 }
