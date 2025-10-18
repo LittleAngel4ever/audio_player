@@ -1,6 +1,6 @@
 const songs = [
   {title: "Шёлк", src: "songs/shelk.mp3", cover: "covers_of_songs/shelc.jpg", lyricsFile: "texts/shelc.txt"},
-  {title: "Настоящая", src: "songs/nastoyashaya.mp3", cover: "covers_of_songs/nastoyashay.jpg", lyricsFile: "texts/nastoyashay.txt"},
+  {title: "Настоящая", src: "songs/nastoyshay.mp3", cover: "covers_of_songs/nastoyashay.jpg", lyricsFile: "texts/nastoyashay.txt"},
   {title: "Стерва", src: "songs/sterva.mp3", cover: "covers_of_songs/sterva.jpg", lyricsFile: "texts/sterva.txt"},
   {title: "Венера-Юпитер", src: "songs/venera-upiter.mp3", cover: "covers_of_songs/venera-upiter.jpg", lyricsFile: "texts/venera-upiter.txt"}
 ]
@@ -14,10 +14,7 @@ function renSongsList() {
   list.innerHTML = ""
   songs.forEach((track, index) => {
     const li = document.createElement("li")
-    li.innerHTML = `
-      <img src="${track.cover}" alt="${track.title}" class="cover-thumb" />
-      <span class="title-text">${track.title}</span>
-    `
+    li.innerHTML = `<img src="${track.cover}" alt="${track.title}" class="cover-thumb" /><span class="title-text">${track.title}</span>`
     li.onclick = () => loadingSongs(index)
     if (index === curSongs) li.classList.add("active-item")
     list.appendChild(li)
@@ -27,58 +24,48 @@ function renSongsList() {
 function loadingSongs(ind) {
   curSongs = ind
   const track = songs[ind]
+
   document.getElementById("music-list").style.display = "none"
   document.getElementById("player-box").style.display = "block"
   document.getElementById("song-title").textContent = track.title
-  document.getElementById("song-artist").textContent = "Ваня Дмитриенко"
+  document.getElementById("song-artist").textContent = "Исполнитель"
   document.getElementById("album-cover").src = track.cover
+
   audios = document.getElementById("audio-player")
-  audios.src = track.src
-  audios.load()
-
-  document.getElementById("download-link").href = track.src
-
+  audios.pause()                     
+  audios.src = track.src            
+  audios.load()                     
   const playIcon = document.getElementById("play-symbol")
   playIcon.src = "assets/play.png"
   playIcon.alt = "Play"
-  fetch(track.lyricsFile)
-    .then(response => response.ok ? response.text() : Promise.reject())
-    .then(text => {const lyricsBox = document.getElementById("song-text")
-      if (lyricsBox) {lyricsBox.textContent = text}})
-    .catch(() => {document.getElementById("song-text").textContent = "Song text not found."})
-  setProgress()
-  renSongsList()
+
+  document.getElementById("download-link").href = track.src
   fetch(track.lyricsFile)
     .then(response => response.ok ? response.text() : Promise.reject())
     .then(text => {
-      const lyricsBox = document.getElementById("song-text")
-      if (lyricsBox) lyricsBox.textContent = text
+      document.getElementById("song-text").textContent = text
     })
     .catch(() => {
-      const lyricsBox = document.getElementById("song-text")
-      if (lyricsBox) lyricsBox.textContent = "Song text not found."
+      document.getElementById("song-text").textContent = "Song text not found."
     })
+
   setProgress()
   renSongsList()
 }
 
 function togglePlay() {
-  if (!audios) audios = document.getElementById("audio-player")
-  if (!audios) return
+  audios = document.getElementById("audio-player")
   const icon = document.getElementById("play-symbol")
-  if (audios.paused) {
-    audios.play().then(() => {
-      if (icon) {
-        icon.src = "assets/pause.png"
-        icon.alt = "Pause"
-      }
-    }).catch(() => {})
+  if (audios.paused) {audios.play().then(() => {
+      icon.src = "assets/pause.png"
+      icon.alt = "Pause"
+  }).catch(() => {})
   } else {
     audios.pause()
-    if (icon) {
-      icon.src = "assets/play.png"
-      icon.alt = "Play"
-    }
+  
+    icon.src = "assets/play.png"
+    icon.alt = "Play"
+  
   }
 }
 
